@@ -34,7 +34,7 @@ export default function Home() {
 			}
 		};
 		return (
-			<div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
+			<div className="min-h-[80vh] bg-gray-50 flex flex-col items-center justify-center p-6">
 				<Card className="w-full max-w-md mb-8">
 					<CardContent className="space-y-4">
 						<h1 className="text-2xl font-semibold text-center">QR Code Generator</h1>
