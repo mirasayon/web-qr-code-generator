@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AdsRSYA } from "@/ads/yandex_ads";
+import { Analytics_GA } from "@/analytics/google";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
 				{children}
 				<AdsRSYA.UniversalBanner />
 			</body>
+			<Analytics_GA.Analytics />
 		</html>
 	);
 }
