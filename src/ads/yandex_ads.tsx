@@ -103,16 +103,11 @@ class AdsRSYAClass {
 			</Script>
 		);
 	};
-	UniversalBanner = ({
-		className = "",
-		is_dark,
-	}: { is_dark: boolean; className?: string }): JSX.Element | undefined => {
+	UniversalBanner = ({ className = "" }: { className?: string }): JSX.Element | undefined => {
 		if (!EnvConfig.mode.prod) {
 			return;
 		}
-		const yaid = is_dark
-			? { div: "yandex_rtb_R-A-12114109-4", bid: "R-A-12114109-4" }
-			: { bid: "R-A-12114109-9", div: "yandex_rtb_R-A-12114109-9" };
+		const yaid = { bid: "R-A-15553277-1", div: "yandex_rtb_R-A-15553277-19" };
 		return (
 			<div className="p-2">
 				<div id={yaid.div} className={` ${className} `} />
@@ -130,7 +125,7 @@ class AdsRSYAClass {
 		);
 	};
 	/** Banner ads */
-	Banner_FIRST_AD = ({ is_dark }: { is_dark?: boolean }) => {
+	Banner = ({ is_dark }: { is_dark?: boolean }) => {
 		if (!EnvConfig.mode.prod) {
 			return;
 		}
