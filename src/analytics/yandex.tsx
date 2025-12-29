@@ -1,17 +1,17 @@
-import { EnvConfig } from "@/configs/env";
+import { EnvConfig } from "#/configs/env";
 import Script from "next/script";
 import type { JSX } from "react";
 
 class ReaYMAClass {
-	/** Yandex Metrika Analytics */
-	Mekrika = (): JSX.Element | undefined => {
-		if (!EnvConfig.mode.prod) {
-			return;
-		}
-		return (
-			<>
-				<Script strategy="afterInteractive" id="yandex_metrika">
-					{`
+  /** Yandex Metrika Analytics */
+  Mekrika = (): JSX.Element | undefined => {
+    if (!EnvConfig.mode.prod) {
+      return;
+    }
+    return (
+      <>
+        <Script strategy="afterInteractive" id="yandex_metrika">
+          {`
 												(function (m, e, t, r, i, k, a) {
 							m[i] =
 								m[i] ||
@@ -39,14 +39,18 @@ class ReaYMAClass {
 						});
 	
 				 `}
-				</Script>
-				<noscript>
-					<div>
-						<img src="https://mc.yandex.ru/watch/99307398" style={{ position: "absolute", left: "-9999px;" }} alt="" />
-					</div>
-				</noscript>
-			</>
-		);
-	};
+        </Script>
+        <noscript>
+          <div>
+            <img
+              src="https://mc.yandex.ru/watch/99307398"
+              style={{ position: "absolute", left: "-9999px;" }}
+              alt=""
+            />
+          </div>
+        </noscript>
+      </>
+    );
+  };
 }
 export const YandexA = new ReaYMAClass();
