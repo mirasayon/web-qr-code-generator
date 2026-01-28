@@ -2,7 +2,6 @@
 import React, { useRef, useState } from "react";
 import QRCode from "react-qr-code";
 import { toPng } from "html-to-image";
-
 const MAX_LENGTH = 1024;
 export default function HomeQRCodePage() {
     const qrRef = useRef<HTMLDivElement | null>(null);
@@ -12,7 +11,6 @@ export default function HomeQRCodePage() {
     const [loadingSvg, setLoadingSvg] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [truncated, setTruncated] = useState<boolean>(false);
-
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const v = e.target.value;
         if (v.length > MAX_LENGTH) {
@@ -23,8 +21,7 @@ export default function HomeQRCodePage() {
             setTruncated(false);
         }
     }
-
-    function handleSubmit(e: React.FormEvent) {
+    function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault();
         const trimmed = inputValue.trim();
         if (!trimmed) return;
@@ -33,7 +30,6 @@ export default function HomeQRCodePage() {
         setValue(safe);
         setError(null);
     }
-
     async function downloadPng() {
         if (!qrRef.current || !value) return;
         setError(null);
@@ -56,7 +52,6 @@ export default function HomeQRCodePage() {
             setLoadingPng(false);
         }
     }
-
     async function downloadSvg() {
         if (!qrRef.current || !value) return;
         setError(null);
@@ -103,29 +98,31 @@ export default function HomeQRCodePage() {
             setLoadingSvg(false);
         }
     }
-
     function copyValue() {
         if (!value) return;
         navigator.clipboard?.writeText(value).catch(() => {});
     }
-
     return (
         <main className="min-h-screen flex items-center justify-center p-6 bg-slate-900 text-white">
+            {" "}
             <div className="w-full max-w-md">
+                {" "}
                 <h1 className="text-2xl font-semibold text-center mb-6">
-                    QR Code Generator
-                </h1>
-
+                    {" "}
+                    QR Code Generator{" "}
+                </h1>{" "}
                 <form
                     onSubmit={handleSubmit}
                     className="mb-4"
                     aria-describedby={truncated ? "trunc-note" : undefined}
                 >
+                    {" "}
                     <div className="flex gap-2">
+                        {" "}
                         <label htmlFor="qrvalue" className="sr-only">
-                            QR value
-                        </label>
-
+                            {" "}
+                            QR value{" "}
+                        </label>{" "}
                         <input
                             id="qrvalue"
                             name="qrvalue"
@@ -140,93 +137,99 @@ export default function HomeQRCodePage() {
                             aria-describedby={
                                 truncated ? "trunc-note" : undefined
                             }
-                        />
-
+                        />{" "}
                         <button
                             type="submit"
                             disabled={!inputValue.trim()}
-                            className="px-4 py-2 bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:opacity-50"
+                            className="px-4 py-2 bg-indigo-600 cursor-pointer rounded-md hover:bg-indigo-700 disabled:opacity-50"
                             aria-disabled={!inputValue.trim()}
                         >
-                            Create
-                        </button>
-                    </div>
-
+                            {" "}
+                            Create{" "}
+                        </button>{" "}
+                    </div>{" "}
                     <div className="mt-2 flex items-center justify-between text-sm text-slate-400">
+                        {" "}
                         <span>
-                            {inputValue.length}/{MAX_LENGTH}
-                        </span>
+                            {" "}
+                            {inputValue.length}/{MAX_LENGTH}{" "}
+                        </span>{" "}
                         {truncated ? (
                             <span id="trunc-note" className="text-yellow-300">
-                                Input truncated to {MAX_LENGTH} chars
+                                {" "}
+                                Input truncated to {MAX_LENGTH} chars{" "}
                             </span>
-                        ) : null}
-                    </div>
-                </form>
-
+                        ) : null}{" "}
+                    </div>{" "}
+                </form>{" "}
                 <section className="flex flex-col items-center gap-4">
+                    {" "}
                     {value ? (
                         <>
+                            {" "}
                             <div className=" bg-slate-400/30 p-6 rounded-lg">
+                                {" "}
                                 <div
                                     ref={qrRef}
                                     className="qr-export-bg p-4 rounded-lg shadow"
                                     aria-hidden={false}
                                     style={{ display: "inline-block" }}
                                 >
+                                    {" "}
                                     <QRCode
                                         value={value}
                                         size={256}
                                         level="M"
                                         bgColor="#ffffff"
                                         fgColor="#000000"
-                                    />
-                                </div>
-                            </div>
-
+                                    />{" "}
+                                </div>{" "}
+                            </div>{" "}
                             <div className="flex gap-3 items-center mt-2">
+                                {" "}
                                 <button
                                     type="button"
                                     onClick={downloadPng}
                                     disabled={loadingPng}
-                                    className="px-4 py-2 bg-emerald-600 rounded-md hover:bg-emerald-700 disabled:opacity-50"
+                                    className="px-4 py-2 cursor-pointer bg-emerald-600 rounded-md hover:bg-emerald-700 disabled:opacity-50"
                                 >
+                                    {" "}
                                     {loadingPng
                                         ? "Preparing PNG..."
-                                        : "Download PNG"}
-                                </button>
-
+                                        : "Download PNG"}{" "}
+                                </button>{" "}
                                 <button
                                     type="button"
                                     onClick={downloadSvg}
                                     disabled={loadingSvg}
-                                    className="px-4 py-2 bg-sky-600 rounded-md hover:bg-sky-700 disabled:opacity-50"
+                                    className="px-4 py-2 cursor-pointer bg-sky-600 rounded-md hover:bg-sky-700 disabled:opacity-50"
                                 >
+                                    {" "}
                                     {loadingSvg
                                         ? "Preparing SVG..."
-                                        : "Download SVG"}
-                                </button>
-
+                                        : "Download SVG"}{" "}
+                                </button>{" "}
                                 <button
                                     type="button"
                                     onClick={copyValue}
-                                    className="px-3 py-2 bg-slate-700 rounded-md hover:bg-slate-600 text-sm"
+                                    className="px-3 py-2 cursor-pointer bg-slate-700 rounded-md hover:bg-slate-600 text-sm"
                                 >
-                                    Copy
-                                </button>
-                            </div>
+                                    {" "}
+                                    Copy{" "}
+                                </button>{" "}
+                            </div>{" "}
                         </>
                     ) : (
                         <p className="text-slate-400">
-                            Enter a value above to generate a QR code.
+                            {" "}
+                            Enter a value above to generate a QR code.{" "}
                         </p>
-                    )}
-
+                    )}{" "}
                     {error && (
                         <p className="text-sm text-red-600 mt-2">{error}</p>
-                    )}
-                </section>
-            </div>
+                    )}{" "}
+                </section>{" "}
+            </div>{" "}
         </main>
     );
 }
