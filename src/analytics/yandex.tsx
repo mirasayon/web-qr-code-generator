@@ -1,18 +1,16 @@
 import { EnvConfig } from "#/configs/env";
 import Script from "next/script";
 import type { JSX } from "react";
-
-class ReaYMAClass {
-  /** Yandex Metrika Analytics */
-  Mekrika = (): JSX.Element | undefined => {
+ 
+/** Yandex Metrika Analytics */
+export function Mekrika(): JSX.Element | undefined {
     if (!EnvConfig.mode.prod) {
       return;
     }
     return (
       <>
         <Script strategy="afterInteractive" id="yandex_metrika">
-          {`
-												(function (m, e, t, r, i, k, a) {
+          {`(function (m, e, t, r, i, k, a) {
 							m[i] =
 								m[i] ||
 								function () {
@@ -51,6 +49,4 @@ class ReaYMAClass {
         </noscript>
       </>
     );
-  };
-}
-export const YandexA = new ReaYMAClass();
+  }; 
